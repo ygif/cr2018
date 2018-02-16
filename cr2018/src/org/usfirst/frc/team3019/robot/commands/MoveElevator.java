@@ -35,4 +35,9 @@ public class MoveElevator extends Command {
 	protected boolean isFinished() {
 		return false;
 	}
+	
+	@Override
+	protected void interrupted() {
+		end();
+	}
 }

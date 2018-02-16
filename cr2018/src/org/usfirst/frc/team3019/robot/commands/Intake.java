@@ -35,5 +35,9 @@ public class Intake extends Command {
 	protected boolean isFinished() {
 		return false;
 	}
-
+	
+	@Override
+	protected void interrupted() {
+		end();
+	}
 }
