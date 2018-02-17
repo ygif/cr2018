@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3019.robot.subsystems;
 
+import org.usfirst.frc.team3019.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -8,9 +10,9 @@ public class Climber extends Subsystem{
 	VictorSP left;
 	VictorSP right;
 	
-	public Climber(int leftDevice, int rightDevice) {
-		left = new VictorSP(leftDevice);
-		right = new VictorSP(rightDevice);
+	public Climber() {
+		left = new VictorSP(RobotMap.leftClimbMotor);
+		right = new VictorSP(RobotMap.rightClimbMotor);
 	}
 	
 	public void setMotors(double speed) {

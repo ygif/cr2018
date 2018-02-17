@@ -3,33 +3,30 @@ package org.usfirst.frc.team3019.robot.subsystems;
 import org.usfirst.frc.team3019.robot.RobotMap;
 import org.usfirst.frc.team3019.robot.commands.Drive;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SendableBuilderImpl;
 /**
  *
  */
 public class Drivetrain extends Subsystem {
 	
-	WPI_TalonSRX leftFrontMotor;
-	WPI_TalonSRX leftRearMotor;
-	WPI_TalonSRX rightFrontMotor;
-	//VictorSP rightRearMotor;
+	VictorSP leftFrontMotor;
+	VictorSP leftRearMotor;
+	VictorSP rightFrontMotor;
+	VictorSP rightRearMotor;
 	DifferentialDrive dd;
 	
 	public Drivetrain() {
 		super();
 		
-		leftFrontMotor = new WPI_TalonSRX(0);
-		leftRearMotor = new WPI_TalonSRX(1);
+		leftFrontMotor = new VictorSP(0);
+		leftRearMotor = new VictorSP(1);
 		SpeedControllerGroup left = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
 		
-		rightFrontMotor = new WPI_TalonSRX(2);
-		//rightRearMotor = new VictorSP(3);
+		rightFrontMotor = new VictorSP(2);
+		rightRearMotor = new VictorSP(3);
 		SpeedControllerGroup right = new SpeedControllerGroup(rightFrontMotor);
 		
 		dd = new DifferentialDrive(left, right);

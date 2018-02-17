@@ -51,9 +51,9 @@ public class Drive extends Command {
 			turn = Robot.oi.xbox.getX(Hand.kLeft);
 		}
 		
-		double axis = Robot.oi.xbox.getTriggerAxis(Hand.kRight) * 0.9;
+		/*double axis = Robot.oi.xbox.getTriggerAxis(Hand.kRight) * 0.9;
 		double throttle = RobotMap.orientForward ? axis : -axis;
-		double t = Robot.oi.xbox.getX(Hand.kLeft);
+		double t = Robot.oi.xbox.getX(Hand.kLeft);*/
 		
 		//stick only
 		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, turn * RobotMap.DRIVE_SCALE_FACTOR);

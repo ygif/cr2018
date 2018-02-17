@@ -42,6 +42,28 @@ public class Robot extends IterativeRobot {
 	Recorder recorder;
 	Playback auto;
 
+	public void robot() {
+		driveTrain = new Drivetrain();
+		climber = new Climber();
+		elevator = new Elevator();
+		intakeSystem = new IntakeSystem();
+		
+		recorder = new Recorder(RobotMap.xbox1port);
+
+		station.addDefault("Left station", "left");
+		station.addObject("Center station", "center");
+		station.addObject("Right station", "right");
+		SmartDashboard.putData("Alliance station", station);
+
+		shouldRecord.addDefault("Don't record", Boolean.FALSE);
+		shouldRecord.addObject("record", Boolean.TRUE);
+		SmartDashboard.putData("Toggle Recorder", shouldRecord);
+
+		switchSide.addDefault("Left", "L");
+		switchSide.addObject("Right", "R");
+		SmartDashboard.putData("Switch Side", switchSide);
+	}
+	
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -67,20 +89,6 @@ public class Robot extends IterativeRobot {
 		 * 
 		 * }).start();
 		 */
-		recorder = new Recorder(RobotMap.xbox1port);
-
-		station.addDefault("Left station", "left");
-		station.addObject("Center station", "center");
-		station.addObject("Right station", "right");
-		SmartDashboard.putData("Alliance station", station);
-
-		shouldRecord.addDefault("Don't record", Boolean.FALSE);
-		shouldRecord.addObject("record", Boolean.TRUE);
-		SmartDashboard.putData("Toggle Recorder", shouldRecord);
-
-		switchSide.addDefault("Left", "L");
-		switchSide.addObject("Right", "R");
-		SmartDashboard.putData("Switch Side", switchSide);
 	}
 
 	/**

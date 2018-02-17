@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3019.robot.subsystems;
 
+import org.usfirst.frc.team3019.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -8,9 +10,9 @@ public class IntakeSystem extends Subsystem{
 	VictorSP left;
 	VictorSP right;
 	
-	public IntakeSystem(int leftDevice, int rightDevice) {
-		left = new VictorSP(leftDevice);
-		right = new VictorSP(rightDevice);
+	public IntakeSystem() {
+		left = new VictorSP(RobotMap.leftIntakeMotor);
+		right = new VictorSP(RobotMap.rightIntakeMotor);
 	}
 	
 	public void setMotors(double speed) {
