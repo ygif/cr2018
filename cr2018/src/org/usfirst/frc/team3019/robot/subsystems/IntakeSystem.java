@@ -5,7 +5,7 @@ import org.usfirst.frc.team3019.robot.RobotMap;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class IntakeSystem extends Subsystem{
+public class IntakeSystem extends Subsystem {
 
 	VictorSP left;
 	VictorSP right;

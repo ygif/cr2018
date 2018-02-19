@@ -26,10 +26,10 @@ public class RobotMap {
 	public static double ELEVATOR_MOVE_SCALE_FACTOR = 1.0;
 	public static double CLIMB_SCALE_FACTOR = 1.0;
 	
-	public static int leftClimbMotor = 0;
-	public static int rightClimbMotor = 0;
-	public static int elevatorMotorOne = 0;
-	public static int elevatorMotorTwo = 0;
-	public static int leftIntakeMotor = 0;
-	public static int rightIntakeMotor = 0;
+	public static int leftClimbMotor = 4;
+	public static int rightClimbMotor = 5;
+	public static int elevatorMotorOne = 6;
+	public static int elevatorMotorTwo = 7;
+	public static int leftIntakeMotor = 8;
+	public static int rightIntakeMotor = 9;
 }

@@ -43,13 +43,24 @@ public class Robot extends IterativeRobot {
 	Playback auto;
 
 	public void robot() {
+		
+
+		
+	}
+	
+	/**
+	 * This function is run when the robot is first started up and should be used
+	 * for any initialization code.
+	 */
+	@Override
+	public void robotInit() {
 		driveTrain = new Drivetrain();
 		climber = new Climber();
 		elevator = new Elevator();
 		intakeSystem = new IntakeSystem();
 		
 		recorder = new Recorder(RobotMap.xbox1port);
-
+		
 		station.addDefault("Left station", "left");
 		station.addObject("Center station", "center");
 		station.addObject("Right station", "right");
@@ -62,14 +73,7 @@ public class Robot extends IterativeRobot {
 		switchSide.addDefault("Left", "L");
 		switchSide.addObject("Right", "R");
 		SmartDashboard.putData("Switch Side", switchSide);
-	}
-	
-	/**
-	 * This function is run when the robot is first started up and should be used
-	 * for any initialization code.
-	 */
-	@Override
-	public void robotInit() {
+		
 		oi = new OI();
 
 		/*

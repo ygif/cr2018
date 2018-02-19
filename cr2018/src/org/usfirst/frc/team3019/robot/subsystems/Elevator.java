@@ -12,7 +12,7 @@ public class Elevator extends Subsystem {
 	
 	public Elevator() {
 		one = new VictorSP(RobotMap.elevatorMotorOne);
-		two = new VictorSP(RobotMap.rightClimbMotor);
+		two = new VictorSP(RobotMap.elevatorMotorTwo);
 	}
 	
 	public void setMotors(double speed) {

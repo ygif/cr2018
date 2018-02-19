@@ -51,15 +51,21 @@ public class OI {
 	
 	public PlaybackXboxController xbox;
 	
-	Button intake = new JoystickButton(xbox, 1);
-	Button outtake = new JoystickButton(xbox, 3);
-	Button elevatorUp = new JoystickButton(xbox, 2);
-	Button elevatorDown = new JoystickButton(xbox, 4);
-	Button toggleDriveOrientation = new JoystickButton(xbox, 5);
-	Button climb = new JoystickButton(xbox, 6);
+	Button intake; 
+	Button outtake;
+	Button elevatorUp;
+	Button elevatorDown;
+	Button toggleDriveOrientation; 
+	Button climb;
 	
 	public OI() {
 		xbox = new PlaybackXboxController(RobotMap.xbox1port);
+		intake = new JoystickButton(xbox, 1);
+		outtake = new JoystickButton(xbox, 3);
+		elevatorUp = new JoystickButton(xbox, 2);
+		elevatorDown = new JoystickButton(xbox, 4);
+		toggleDriveOrientation = new JoystickButton(xbox, 5);
+		climb = new JoystickButton(xbox, 6);
 		
 		intake.whileHeld(new Intake(false));
 		outtake.whileHeld(new Intake(true));

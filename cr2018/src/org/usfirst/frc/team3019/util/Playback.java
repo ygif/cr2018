@@ -59,7 +59,6 @@ public class Playback {
 			e.printStackTrace();
 		}
 		isRunning = false;
-		startTime = Timer.getFPGATimestamp();
 	}
 
 	public void start() {

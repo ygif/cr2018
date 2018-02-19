@@ -25,13 +25,6 @@ public class Drive extends Command {
 		requires(Robot.driveTrain);
 	}
 
-	public Drive(double move, double turn) {
-		super();
-		requires(Robot.driveTrain);
-		this.move = move;
-		this.turn = turn;
-	}
-
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
@@ -56,7 +49,7 @@ public class Drive extends Command {
 		double t = Robot.oi.xbox.getX(Hand.kLeft);*/
 		
 		//stick only
-		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, turn * RobotMap.DRIVE_SCALE_FACTOR);
+		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.DRIVE_SCALE_FACTOR);
 		
 		//trigger and stick
 		//Robot.driveTrain.arcadeDrive(throttle, t);

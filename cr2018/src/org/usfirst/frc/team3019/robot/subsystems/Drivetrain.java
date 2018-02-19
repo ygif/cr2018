@@ -21,13 +21,15 @@ public class Drivetrain extends Subsystem {
 	public Drivetrain() {
 		super();
 		
-		leftFrontMotor = new VictorSP(0);
-		leftRearMotor = new VictorSP(1);
+		leftFrontMotor = new VictorSP(2);
+		leftRearMotor = new VictorSP(3);
 		SpeedControllerGroup left = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
+		left.setInverted(true);
 		
-		rightFrontMotor = new VictorSP(2);
-		rightRearMotor = new VictorSP(3);
-		SpeedControllerGroup right = new SpeedControllerGroup(rightFrontMotor);
+		rightFrontMotor = new VictorSP(0);
+		rightRearMotor = new VictorSP(1);
+		SpeedControllerGroup right = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
+		right.setInverted(true);
 		
 		dd = new DifferentialDrive(left, right);
 		dd.setSafetyEnabled(false);
