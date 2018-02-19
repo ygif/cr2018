@@ -9,12 +9,15 @@ package org.usfirst.frc.team3019.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.io.IOException;
 
+import org.usfirst.frc.team3019.robot.subsystems.ArmRotator;
 import org.usfirst.frc.team3019.robot.subsystems.Climber;
 import org.usfirst.frc.team3019.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3019.robot.subsystems.Elevator;
@@ -34,6 +37,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static Elevator elevator;
 	public static IntakeSystem intakeSystem;
+	public static ArmRotator armRotator;
 	public static OI oi;
 
 	SendableChooser<String> station = new SendableChooser<String>();
@@ -42,10 +46,24 @@ public class Robot extends IterativeRobot {
 	Recorder recorder;
 	Playback auto;
 
-	public void robot() {
-		
-
-		
+	public Robot() {
+		/*
+		 * new Thread(() -> {
+		 * 
+		 * UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		 * camera.setResolution(640, 480);
+		 * 
+		 * CvSink cvSink = CameraServer.getInstance().getVideo(); CvSource outputStream
+		 * = CameraServer.getInstance().putVideo("Blur", 640, 480);
+		 * 
+		 * Mat source = new Mat(); Mat output = new Mat();
+		 * 
+		 * while (!Thread.interrupted()) { cvSink.grabFrame(source);
+		 * Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+		 * outputStream.putFrame(output); }
+		 * 
+		 * }).start();
+		 */	
 	}
 	
 	/**
@@ -58,6 +76,7 @@ public class Robot extends IterativeRobot {
 		climber = new Climber();
 		elevator = new Elevator();
 		intakeSystem = new IntakeSystem();
+		armRotator = new ArmRotator();
 		
 		recorder = new Recorder(RobotMap.xbox1port);
 		
@@ -75,24 +94,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Switch Side", switchSide);
 		
 		oi = new OI();
-
-		/*
-		 * new Thread(() -> {
-		 * 
-		 * UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		 * camera.setResolution(640, 480);
-		 * 
-		 * CvSink cvSink = CameraServer.getInstance().getVideo(); CvSource outputStream
-		 * = CameraServer.getInstance().putVideo("Blur", 640, 480);
-		 * 
-		 * Mat source = new Mat(); Mat output = new Mat();
-		 * 
-		 * while (!Thread.interrupted()) { cvSink.grabFrame(source);
-		 * Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-		 * outputStream.putFrame(output); }
-		 * 
-		 * }).start();
-		 */
 	}
 
 	/**
@@ -107,6 +108,7 @@ public class Robot extends IterativeRobot {
 			auto.stop();
 			auto = null;
 		}
+		//setPeriod(0.02);
 		oi.xbox.setPlaybackMode(false);
 	}
 
@@ -148,6 +150,8 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		auto.playback();
 		Scheduler.getInstance().run();
+		
+		//setPeriod(auto.getRecordedPeriod());
 	}
 
 	@Override
@@ -156,6 +160,7 @@ public class Robot extends IterativeRobot {
 			auto.stop();
 			auto = null;
 		}
+		//setPeriod(0.02);
 		oi.xbox.setPlaybackMode(false);
 	}
 
@@ -179,6 +184,13 @@ public class Robot extends IterativeRobot {
 		}
 
 		Scheduler.getInstance().run();
+	}
+	
+	@Override
+	public void robotPeriodic() {
+		SmartDashboard.putString("left stick", oi.xbox.getX(Hand.kLeft) + " " + oi.xbox.getY(Hand.kLeft));
+		SmartDashboard.putNumber("time", Timer.getFPGATimestamp());
+		SmartDashboard.putBoolean("Recorder on?", recorder.isRunning);
 	}
 
 	/**

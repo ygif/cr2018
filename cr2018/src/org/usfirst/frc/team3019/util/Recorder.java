@@ -28,9 +28,9 @@ public class Recorder {
 	public boolean isRunning;
 
 	/**
+	 * Create a new recorder with the given joystick
 	 * 
-	 * @param joystick
-	 *            joystick port number
+	 * @param joystick joystick port number
 	 */
 	public Recorder(int joystick) {
 		ds = DriverStation.getInstance();
@@ -45,8 +45,7 @@ public class Recorder {
 	 * Start recording input data from a joystick into the file with the specified
 	 * name
 	 * 
-	 * @param name
-	 *            The name of the file to write to.
+	 * @param name The name of the file to write to.
 	 */
 	public void start(String name) {
 		file = new File(PATH + "/" + name + ".txt");
@@ -157,7 +156,6 @@ public class Recorder {
 			String s = cons[i].getName();
 			try {
 				if (s.contains("SCALE_FACTOR")) {
-
 					temp.append(s + " " + cons[i].getDouble(RobotMap.class) + " ");
 				} else if (s.contains("orientForward")) {
 					temp.append(s + " " + cons[i].getBoolean(RobotMap.class) + " ");
@@ -167,6 +165,7 @@ public class Recorder {
 			}
 
 		}
+		
 		temp.append("\n");
 		try {
 			fw.append(temp);

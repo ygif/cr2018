@@ -27,8 +27,7 @@ public class Playback {
 	/**
 	 * Creates an instance of Playback using the file with the specified name
 	 * 
-	 * @param name
-	 *            file to load
+	 * @param name file to load
 	 */
 	public Playback(String name) {
 		file = new File(PATH + "/" + name + ".txt");
@@ -87,10 +86,8 @@ public class Playback {
 			// i the variable's name, i + 1 is its value
 			String[] cons = values.get(0).split(" ");
 			for (int i = 1; i < cons.length; i += 2) {
-
 				Field[] temp = RobotMap.class.getDeclaredFields();
 				for (int j = 0; j < temp.length; j++) {
-
 					try {
 						if (temp[j].getName().equals("orientForward")) {
 							temp[j].setBoolean(RobotMap.class, Boolean.parseBoolean(cons[i + 1]));
@@ -201,5 +198,11 @@ public class Playback {
 		return currentTime - Double.parseDouble(values.get(loc)
 				.split(";", 4)[0]
 				.split(" ")[0]);
+	}
+	
+	public double getRecordedPeriod() {
+		return Double.parseDouble(values.get(loc)
+				.split(";")[0]
+				.split(" ")[1]);
 	}
 }

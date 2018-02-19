@@ -5,7 +5,7 @@ import org.usfirst.frc.team3019.robot.RobotMap;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Climber extends Subsystem{
+public class Climber extends Subsystem {
 
 	VictorSP left;
 	VictorSP right;

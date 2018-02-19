@@ -46,6 +46,6 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void curvatureDrive(double moveSpeed, double turn) {
-		dd.curvatureDrive(moveSpeed, turn, true);
+		dd.curvatureDrive(moveSpeed * RobotMap.DRIVE_SCALE_FACTOR, turn * RobotMap.DRIVE_SCALE_FACTOR, true);
 	}
 }

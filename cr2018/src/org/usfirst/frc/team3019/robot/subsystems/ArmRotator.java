@@ -5,26 +5,20 @@ import org.usfirst.frc.team3019.robot.RobotMap;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class IntakeSystem extends Subsystem {
+public class ArmRotator extends Subsystem {
 
-	VictorSP left;
-	VictorSP right;
 	VictorSP rotateMotor;
 	
-	public IntakeSystem() {
-		left = new VictorSP(RobotMap.leftIntakeMotor);
-		right = new VictorSP(RobotMap.rightIntakeMotor);
+	public ArmRotator() {
 		rotateMotor = new VictorSP(RobotMap.rotateClawMotor);
 	}
 	
-	public void setMotors(double speed) {
-		left.set(speed);
-		right.set(-speed);
+	public void rotateArm(double speed) {
+		rotateMotor.setSpeed(speed);
 	}
 	
-	public void stopMotors() {
-		left.stopMotor();
-		right.stopMotor();
+	public void stopArmRotation() {
+		rotateMotor.stopMotor();
 	}
 	
 	@Override
