@@ -2,21 +2,22 @@ package org.usfirst.frc.team3019.robot.subsystems;
 
 import org.usfirst.frc.team3019.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevator extends Subsystem {
 
-	VictorSP one;
+	WPI_TalonSRX one;
 	DigitalInput top;
 	DigitalInput bottom;
 	
 	double speed;
 	
 	public Elevator() {
-		one = new VictorSP(RobotMap.elevatorMotorOne);
+		one = new WPI_TalonSRX(RobotMap.elevatorMotorOne);
 		top = new DigitalInput(RobotMap.topElevatorSwitch);
 		bottom = new DigitalInput(RobotMap.bottomElevatorSwitch);
 		speed = 0.0;

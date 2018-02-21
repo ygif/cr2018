@@ -2,17 +2,18 @@ package org.usfirst.frc.team3019.robot.subsystems;
 
 import org.usfirst.frc.team3019.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.VictorSP;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
 
-	VictorSP left;
-	VictorSP right;
+	WPI_TalonSRX left;
+	WPI_TalonSRX right;
 	
 	public Climber() {
-		left = new VictorSP(RobotMap.leftClimbMotor);
-		right = new VictorSP(RobotMap.rightClimbMotor);
+		left = new WPI_TalonSRX(RobotMap.leftClimbMotor);
+		right = new WPI_TalonSRX(RobotMap.rightClimbMotor);
 	}
 	
 	public void setMotors(double speed) {

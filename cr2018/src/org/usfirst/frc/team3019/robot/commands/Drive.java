@@ -37,11 +37,11 @@ public class Drive extends Command {
 		SmartDashboard.putNumber("turn", turn);
 
 		if (RobotMap.orientForward) {
-			move = -Robot.oi.xbox.getY(Hand.kLeft);
-			turn = Robot.oi.xbox.getX(Hand.kLeft);
+			move = -Robot.oi.xbox.getY(Hand.kRight);
+			turn = Robot.oi.xbox.getX(Hand.kRight);
 		} else {
-			move = Robot.oi.xbox.getY(Hand.kLeft);
-			turn = Robot.oi.xbox.getX(Hand.kLeft);
+			move = Robot.oi.xbox.getY(Hand.kRight);
+			turn = Robot.oi.xbox.getX(Hand.kRight);
 		}
 		
 		/*double axis = Robot.oi.xbox.getTriggerAxis(Hand.kRight) * 0.9;

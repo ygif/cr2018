@@ -3,8 +3,9 @@ package org.usfirst.frc.team3019.robot.subsystems;
 import org.usfirst.frc.team3019.robot.RobotMap;
 import org.usfirst.frc.team3019.robot.commands.Drive;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 /**
@@ -12,22 +13,22 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  */
 public class Drivetrain extends Subsystem {
 	
-	VictorSP leftFrontMotor;
-	VictorSP leftRearMotor;
-	VictorSP rightFrontMotor;
-	VictorSP rightRearMotor;
+	WPI_TalonSRX leftFrontMotor;
+	WPI_TalonSRX leftRearMotor;
+	WPI_TalonSRX rightFrontMotor;
+	WPI_TalonSRX rightRearMotor;
 	DifferentialDrive dd;
 	
 	public Drivetrain() {
 		super();
 		
-		leftFrontMotor = new VictorSP(2);
-		leftRearMotor = new VictorSP(3);
+		leftFrontMotor = new WPI_TalonSRX(RobotMap.leftFront);
+		leftRearMotor = new WPI_TalonSRX(RobotMap.leftBack);
 		SpeedControllerGroup left = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
 		left.setInverted(true);
 		
-		rightFrontMotor = new VictorSP(0);
-		rightRearMotor = new VictorSP(1);
+		rightFrontMotor = new WPI_TalonSRX(RobotMap.rightFront);
+		rightRearMotor = new WPI_TalonSRX(RobotMap.rightBack);
 		SpeedControllerGroup right = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
 		right.setInverted(true);
 		
