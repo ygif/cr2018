@@ -43,6 +43,7 @@ public class Robot extends IterativeRobot {
 	SendableChooser<String> station = new SendableChooser<String>();
 	SendableChooser<Boolean> shouldRecord = new SendableChooser<Boolean>();
 	SendableChooser<String> switchSide = new SendableChooser<String>();
+	SendableChooser<String> scaleSide = new SendableChooser<String>();
 	Recorder recorder;
 	Playback auto;
 
@@ -89,9 +90,13 @@ public class Robot extends IterativeRobot {
 		shouldRecord.addObject("record", Boolean.TRUE);
 		SmartDashboard.putData("Toggle Recorder", shouldRecord);
 
-		switchSide.addDefault("Left", "L");
-		switchSide.addObject("Right", "R");
+		switchSide.addDefault("Left Switch", "L");
+		switchSide.addObject("Right Switch", "R");
 		SmartDashboard.putData("Switch Side", switchSide);
+		
+		scaleSide.addDefault("Left Scale", "L");
+		scaleSide.addDefault("Right Scale", "R");
+		SmartDashboard.putData("Scale Side",scaleSide);
 		
 		oi = new OI();
 	}
@@ -135,7 +140,7 @@ public class Robot extends IterativeRobot {
 			recorder.stop();
 		}
 		if (auto == null) {
-			String name = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);
+			String name = DriverStation.getInstance().getGameSpecificMessage().substring(0, 2);
 			name += station.getSelected();
 			auto = new Playback(name);
 		}
@@ -171,7 +176,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 
 		if (shouldRecord.getSelected().booleanValue() && !recorder.isRunning) {
-			recorder.start(switchSide.getSelected() + station.getSelected());
+			recorder.start(switchSide.getSelected() + scaleSide.getSelected() + station.getSelected());
 		} else if (shouldRecord.getSelected().booleanValue() == false && recorder.isRunning) {
 			recorder.stop();
 		}
