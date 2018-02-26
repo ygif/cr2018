@@ -34,8 +34,7 @@ public class RobotMap {
 	
 	public static int leftClimbMotor = 4;
 	public static int rightClimbMotor = 5;
-	public static int elevatorMotorOne = 6;
-	public static int elevatorMotorTwo = 7;
+	public static int elevatorMotorOne = 0;//CAN ID
 	
 	public static int leftIntakeMotor = 1;
 	public static int rightIntakeMotor = 0;
