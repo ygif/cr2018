@@ -58,11 +58,6 @@ public class Recorder {
 
 		try {
 			file.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
 			fw = new FileWriter(file);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -91,11 +86,6 @@ public class Recorder {
 
 		try {
 			file.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
 			fw = new FileWriter(file);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -110,7 +100,6 @@ public class Recorder {
 		isRunning = true;
 	}
 
-	// /home/lvuser/
 	/**
 	 * Takes the state of every button and axis and writes those to a file.
 	 * 
