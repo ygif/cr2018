@@ -33,7 +33,8 @@ public class MoveElevator extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return (!Robot.elevator.top.get() && Robot.elevator.speed > 0.0) ||
+				(!Robot.elevator.bottom.get() && Robot.elevator.speed < 0.0);
 	}
 	
 	@Override

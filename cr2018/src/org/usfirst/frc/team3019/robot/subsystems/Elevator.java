@@ -6,15 +6,14 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevator extends Subsystem {
 
 	WPI_TalonSRX one;
-	DigitalInput top;
-	DigitalInput bottom;
+	public DigitalInput top;
+	public DigitalInput bottom;
 	
-	double speed;
+	public double speed;
 	
 	public Elevator() {
 		one = new WPI_TalonSRX(RobotMap.elevatorMotorOne);
@@ -36,14 +35,5 @@ public class Elevator extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		
-	}
-	
-	@Override
-	public void periodic() {
-		SmartDashboard.putNumber("elevator speed", speed);
-		if((top.get() && speed > 0.0) || (bottom.get() && speed < 0.0)) {
-			stopMotors();
-			getCurrentCommand().cancel();
-		}
 	}
 }
