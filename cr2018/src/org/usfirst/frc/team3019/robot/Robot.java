@@ -196,6 +196,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putString("left stick", oi.xbox.getX(Hand.kLeft) + " " + oi.xbox.getY(Hand.kLeft));
 		SmartDashboard.putNumber("time", Timer.getFPGATimestamp());
 		SmartDashboard.putBoolean("Recorder on?", recorder.isRunning);
+		//driveTrain.postEncoderValues();
 	}
 
 	/**

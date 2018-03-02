@@ -23,7 +23,7 @@ public class Intake extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.intakeSystem.setMotors((forward ? 0.5 : -0.5) * RobotMap.ELEVATOR_MOVE_SCALE_FACTOR);
+		Robot.intakeSystem.setMotors((forward ? 1.0 : -1.0) * RobotMap.INTAKE_SCALE_FACTOR);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class Intake extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return !Robot.intakeSystem.stop.get() && Robot.intakeSystem.speed < 0;
+		return !Robot.intakeSystem.stop.get() && Robot.intakeSystem.speed < 0.0;
 	}
 
 	@Override

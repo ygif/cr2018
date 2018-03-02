@@ -3,17 +3,18 @@ package org.usfirst.frc.team3019.robot.subsystems;
 import org.usfirst.frc.team3019.robot.RobotMap;
 import org.usfirst.frc.team3019.robot.commands.RotateArm;
 
-import edu.wpi.first.wpilibj.VictorSP;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ArmRotator extends Subsystem {
 
-	VictorSP rotateMotorOne;
-	VictorSP rotateMotorTwo;
+	WPI_TalonSRX rotateMotorOne;
+	WPI_TalonSRX rotateMotorTwo;
 	
 	public ArmRotator() {
-		rotateMotorOne = new VictorSP(RobotMap.rotateClawMotorOne);
-		rotateMotorTwo = new VictorSP(RobotMap.rotateClawMotorTwo);
+		rotateMotorOne = new WPI_TalonSRX(RobotMap.rotateClawMotorOne);
+		rotateMotorTwo = new WPI_TalonSRX(RobotMap.rotateClawMotorTwo);
 	}
 	
 	public void rotateArm(double speed) {

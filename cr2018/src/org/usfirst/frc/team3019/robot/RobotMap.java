@@ -26,6 +26,7 @@ public class RobotMap {
 	public static double ELEVATOR_MOVE_SCALE_FACTOR = 1.0;
 	public static double CLIMB_SCALE_FACTOR = 1.0;
 	public static double ARM_ROTATE_SCALE_FACTOR = 0.4;
+	public static double INTAKE_SCALE_FACTOR = 0.35;
 	
 	public static int leftFront = 2;
 	public static int leftBack = 3;
@@ -34,7 +35,7 @@ public class RobotMap {
 	
 	public static int leftClimbMotor = 4;
 	public static int rightClimbMotor = 5;
-	public static int elevatorMotorOne = 0;//CAN ID
+	public static int elevatorMotorOne = 8;//CAN ID = 0
 	
 	public static int leftIntakeMotor = 1;
 	public static int rightIntakeMotor = 0;
