@@ -2,25 +2,24 @@ package org.usfirst.frc.team3019.robot.subsystems;
 
 import org.usfirst.frc.team3019.robot.RobotMap;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class IntakeSystem extends Subsystem {
 
-	WPI_TalonSRX left;
-	WPI_TalonSRX right;
+	VictorSP left;
+	VictorSP right;
 	
 	public DigitalInput stop;
 	
 	public double speed;
 	
 	public IntakeSystem() {
-		left = new WPI_TalonSRX(RobotMap.leftIntakeMotor);
-		right = new WPI_TalonSRX(RobotMap.rightIntakeMotor);
-		stop = new DigitalInput(3);
+		left = new VictorSP(RobotMap.leftIntakeMotor);
+		right = new VictorSP(RobotMap.rightIntakeMotor);
+		stop = new DigitalInput(RobotMap.intakeStopSwitch);
 		speed = 0.0;
 	}
 	

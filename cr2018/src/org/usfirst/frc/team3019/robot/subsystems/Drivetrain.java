@@ -38,8 +38,8 @@ public class Drivetrain extends Subsystem {
 		rightFrontMotor = new WPI_TalonSRX(RobotMap.rightFront);
 		rightRearMotor = new WPI_TalonSRX(RobotMap.rightBack);
 		
-		//rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 1, 20);
-		//rightRearMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 1, 20);
+		//rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 20);
+		//rightRearMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 20);
 		//rightFrontMotor.setSensorPhase(false);
 		//rightRearMotor.setSensorPhase(false);
 		
@@ -53,11 +53,11 @@ public class Drivetrain extends Subsystem {
 	
 	@Override
 	public void initDefaultCommand() {
-		//setDefaultCommand(new Drive());
+		setDefaultCommand(new Drive());
 	}
 	
 	public void arcadeDrive(double moveValue, double rotateValue){
-		dd.arcadeDrive(moveValue * RobotMap.DRIVE_SCALE_FACTOR, rotateValue * RobotMap.DRIVE_SCALE_FACTOR -0.05);
+		dd.arcadeDrive(moveValue * RobotMap.DRIVE_SCALE_FACTOR, rotateValue * RobotMap.DRIVE_SCALE_FACTOR);
 	}
 	
 	public void curvatureDrive(double moveSpeed, double turn) {
@@ -66,8 +66,8 @@ public class Drivetrain extends Subsystem {
 	
 	public void postEncoderValues() {
 		//SmartDashboard.putNumber("left position", leftFrontMotor.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("right position", rightFrontMotor.getSelectedSensorPosition(0));
+		//SmartDashboard.putNumber("right position", rightFrontMotor.getSelectedSensorPosition(0));
 		//SmartDashboard.putNumber("left velocity", leftFrontMotor.getSelectedSensorVelocity(0));
-		SmartDashboard.putNumber("right velocity", rightFrontMotor.getSelectedSensorVelocity(0));
+		//SmartDashboard.putNumber("right velocity", rightFrontMotor.getSelectedSensorVelocity(0));
 	}
 }

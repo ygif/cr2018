@@ -7,6 +7,10 @@
 
 package org.usfirst.frc.team3019.robot;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -17,6 +21,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.io.IOException;
 
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team3019.robot.commands.Drive;
 import org.usfirst.frc.team3019.robot.subsystems.ArmRotator;
 import org.usfirst.frc.team3019.robot.subsystems.Climber;
 import org.usfirst.frc.team3019.robot.subsystems.Drivetrain;
@@ -48,25 +55,25 @@ public class Robot extends IterativeRobot {
 	Playback auto;
 
 	public Robot() {
-		/*
-		 * new Thread(() -> {
-		 * 
-		 * UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		 * camera.setResolution(640, 480);
-		 * 
-		 * CvSink cvSink = CameraServer.getInstance().getVideo(); CvSource outputStream
-		 * = CameraServer.getInstance().putVideo("Blur", 640, 480);
-		 * 
-		 * Mat source = new Mat(); Mat output = new Mat();
-		 * 
-		 * while (!Thread.interrupted()) { cvSink.grabFrame(source);
-		 * Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-		 * outputStream.putFrame(output); }
-		 * 
-		 * }).start();
-		 */	
+		/*new Thread(() -> {
+
+			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+			camera.setResolution(640, 480);
+
+			CvSink cvSink = CameraServer.getInstance().getVideo();
+			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+
+			Mat source = new Mat();
+			Mat output = new Mat();
+
+			while (!Thread.interrupted()) {
+				cvSink.grabFrame(source);
+				Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+				outputStream.putFrame(output);
+			}
+		}).start();*/
 	}
-	
+
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -78,9 +85,9 @@ public class Robot extends IterativeRobot {
 		elevator = new Elevator();
 		intakeSystem = new IntakeSystem();
 		armRotator = new ArmRotator();
-		
+
 		recorder = new Recorder(RobotMap.xbox1port);
-		
+
 		station.addDefault("Left station", "left");
 		station.addObject("Center station", "center");
 		station.addObject("Right station", "right");
@@ -93,11 +100,11 @@ public class Robot extends IterativeRobot {
 		switchSide.addDefault("Left Switch", "L");
 		switchSide.addObject("Right Switch", "R");
 		SmartDashboard.putData("Switch Side", switchSide);
-		
+
 		scaleSide.addDefault("Left Scale", "L");
-		scaleSide.addDefault("Right Scale", "R");
-		SmartDashboard.putData("Scale Side",scaleSide);
-		
+		scaleSide.addObject("Right Scale", "R");
+		SmartDashboard.putData("Scale Side", scaleSide);
+
 		oi = new OI();
 	}
 
@@ -113,7 +120,7 @@ public class Robot extends IterativeRobot {
 			auto.stop();
 			auto = null;
 		}
-		//setPeriod(0.02);
+		// setPeriod(0.02);
 		oi.xbox.setPlaybackMode(false);
 	}
 
@@ -123,12 +130,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable chooser
-	 * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
-	 * remove all of the chooser code and uncomment the getString code to get the
-	 * auto name from the text box below the Gyro
-	 *
 	 * <p>
 	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons to
@@ -139,13 +140,16 @@ public class Robot extends IterativeRobot {
 		if (recorder.isRunning) {
 			recorder.stop();
 		}
-		if (auto == null) {
+		Timer.delay(5.0);
+		Scheduler.getInstance().add(new Drive(0.6, 0, 5.0));
+		/*if (auto == null) 
+		 * {
 			String name = DriverStation.getInstance().getGameSpecificMessage().substring(0, 2);
 			name += station.getSelected();
 			auto = new Playback(name);
 		}
 		auto.start();
-		oi.xbox.setPlaybackMode(true);
+		oi.xbox.setPlaybackMode(true);*/
 	}
 
 	/**
@@ -153,10 +157,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		auto.playback();
-		Scheduler.getInstance().run();
 		
-		//setPeriod(auto.getRecordedPeriod());
+		//auto.playback();
+		Scheduler.getInstance().run();
+
+		// setPeriod(auto.getRecordedPeriod());
 	}
 
 	@Override
@@ -165,7 +170,7 @@ public class Robot extends IterativeRobot {
 			auto.stop();
 			auto = null;
 		}
-		//setPeriod(0.02);
+		// setPeriod(0.02);
 		oi.xbox.setPlaybackMode(false);
 	}
 
@@ -190,13 +195,13 @@ public class Robot extends IterativeRobot {
 
 		Scheduler.getInstance().run();
 	}
-	
+
 	@Override
 	public void robotPeriodic() {
 		SmartDashboard.putString("left stick", oi.xbox.getX(Hand.kLeft) + " " + oi.xbox.getY(Hand.kLeft));
 		SmartDashboard.putNumber("time", Timer.getFPGATimestamp());
 		SmartDashboard.putBoolean("Recorder on?", recorder.isRunning);
-		//driveTrain.postEncoderValues();
+		driveTrain.postEncoderValues();
 	}
 
 	/**

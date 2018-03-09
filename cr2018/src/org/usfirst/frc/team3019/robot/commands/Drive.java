@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3019.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,7 +16,7 @@ public class Drive extends Command {
 	double move;
 	double turn;
 
-	public Drive(int timeout) {
+	public Drive(double timeout) {
 		super(timeout);
 		requires(Robot.driveTrain);
 	}
@@ -23,6 +24,12 @@ public class Drive extends Command {
 	public Drive() {
 		super();
 		requires(Robot.driveTrain);
+	}
+	
+	public Drive(double move, double turn, double timeout) {
+		this(timeout);
+		this.move = move;
+		this.turn = turn;
 	}
 
 	// Called just before this Command runs the first time
@@ -37,22 +44,27 @@ public class Drive extends Command {
 		SmartDashboard.putNumber("turn", turn);
 
 		if (RobotMap.orientForward) {
-			move = -Robot.oi.xbox.getY(Hand.kRight);
-			turn = Robot.oi.xbox.getX(Hand.kRight);
+			move = -Robot.oi.xbox.getY(Hand.kLeft);
+			turn = Robot.oi.xbox.getX(Hand.kLeft);
 		} else {
-			move = Robot.oi.xbox.getY(Hand.kRight);
-			turn = Robot.oi.xbox.getX(Hand.kRight);
+			move = Robot.oi.xbox.getY(Hand.kLeft);
+			turn = Robot.oi.xbox.getX(Hand.kLeft);
 		}
 		
-		/*double axis = Robot.oi.xbox.getTriggerAxis(Hand.kRight) * 0.9;
+		double axis = Robot.oi.xbox.getTriggerAxis(Hand.kRight) * RobotMap.DRIVE_SCALE_FACTOR;
 		double throttle = RobotMap.orientForward ? axis : -axis;
-		double t = Robot.oi.xbox.getX(Hand.kLeft);*/
+		double t = Robot.oi.xbox.getX(Hand.kLeft);
 		
 		//stick only
-		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.DRIVE_SCALE_FACTOR);
+		//Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.DRIVE_SCALE_FACTOR);
 		
 		//trigger and stick
-		//Robot.driveTrain.arcadeDrive(throttle, t);
+		
+		if(DriverStation.getInstance().isOperatorControl()) {
+			Robot.driveTrain.arcadeDrive(throttle, t);
+		} else if(DriverStation.getInstance().isAutonomous()) {
+			Robot.driveTrain.arcadeDrive(move, turn);
+		}
 		
 		//Robot.driveTrain.curvatureDrive(move * RobotMap.DRIVE_SCALE_FACTOR, turn * RobotMap.DRIVE_SCALE_FACTOR);
 	}

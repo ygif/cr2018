@@ -15,7 +15,7 @@ public class RotateArm extends Command {
 	
 	@Override
 	protected void execute() {
-		double stickValue = Robot.oi.xbox.getY(Hand.kLeft);
+		double stickValue = Robot.oi.xbox.getY(Hand.kRight);
 		Robot.armRotator.rotateArm(((stickValue < -0.1 || stickValue > 0.1) ? stickValue : 0.0) * RobotMap.ARM_ROTATE_SCALE_FACTOR);
 	}
 	
@@ -26,7 +26,7 @@ public class RotateArm extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return !Robot.armRotator.stopper.get();
 	}
 	
 	@Override
