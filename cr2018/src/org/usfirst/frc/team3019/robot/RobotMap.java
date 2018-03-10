@@ -24,10 +24,10 @@ public class RobotMap {
 	
 	//Use these to change how fast each system moves
 	public static double DRIVE_SCALE_FACTOR = 1.0;
-	public static double ELEVATOR_MOVE_SCALE_FACTOR = 1;
-	public static double CLIMB_SCALE_FACTOR = 0.75;
-	public static double ARM_ROTATE_SCALE_FACTOR = 0.85;
-	public static double INTAKE_SCALE_FACTOR = 1.0;
+	public static double ELEVATOR_MOVE_SCALE_FACTOR = 0.5;
+	public static double CLIMB_SCALE_FACTOR = 0.9;
+	public static double ARM_ROTATE_SCALE_FACTOR = 0.4;
+	public static double INTAKE_SCALE_FACTOR = 0.7;
 	//
 	
 	public static int leftFront = 2;
