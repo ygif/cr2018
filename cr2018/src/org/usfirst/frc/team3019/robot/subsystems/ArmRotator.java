@@ -11,16 +11,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ArmRotator extends Subsystem {
 
-	WPI_TalonSRX rotateMotorOne;
+	VictorSP rotateMotorOne;
 	VictorSP rotateMotorTwo;
 	
 	public DigitalInput stopper;
 	
 	public ArmRotator() {
-		rotateMotorOne = new WPI_TalonSRX(RobotMap.rotateClawMotorOne);
-		rotateMotorTwo = new VictorSP(8);
+		rotateMotorOne = new VictorSP(RobotMap.rotateClawMotorOne);
+		rotateMotorTwo = new VictorSP(RobotMap.rotateClawMotorTwo);
 		
-		stopper = new DigitalInput(4);
+		stopper = new DigitalInput(RobotMap.armRotateSwitch);
 	}
 	
 	public void rotateArm(double speed) {

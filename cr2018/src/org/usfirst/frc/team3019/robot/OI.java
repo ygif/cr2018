@@ -30,6 +30,7 @@ public class OI {
 	Button elevatorDown;
 	Button toggleDriveOrientation; 
 	Button climb;
+	Button climbDown;
 	
 	public OI() {
 		xbox = new PlaybackXboxController(RobotMap.xbox1port);
@@ -39,12 +40,14 @@ public class OI {
 		elevatorDown = new JoystickButton(xbox, 6);
 		toggleDriveOrientation = new JoystickButton(xbox, 8);
 		climb = new JoystickButton(xbox, 4);
+		climbDown = new JoystickButton(xbox, 3);
 		
 		intake.whileHeld(new Intake(false));
 		outtake.whileHeld(new Intake(true));
 		elevatorUp.whileHeld(new MoveElevator(false));
 		elevatorDown.whileHeld(new MoveElevator(true));
 		climb.whileHeld(new Climb (false));
+		climbDown.whileHeld(new Climb(true));
 		toggleDriveOrientation.whenPressed(new InstantCommand() {
 			@Override
 			protected void initialize() {

@@ -25,7 +25,7 @@ public class Drive extends Command {
 		super();
 		requires(Robot.driveTrain);
 	}
-	
+
 	public Drive(double move, double turn, double timeout) {
 		this(timeout);
 		this.move = move;
@@ -43,30 +43,34 @@ public class Drive extends Command {
 		SmartDashboard.putNumber("move", move);
 		SmartDashboard.putNumber("turn", turn);
 
-		if (RobotMap.orientForward) {
-			move = -Robot.oi.xbox.getY(Hand.kLeft);
-			turn = Robot.oi.xbox.getX(Hand.kLeft);
-		} else {
-			move = Robot.oi.xbox.getY(Hand.kLeft);
-			turn = Robot.oi.xbox.getX(Hand.kLeft);
+		if (DriverStation.getInstance().isOperatorControl()) {
+			if (RobotMap.orientForward) {
+				move = -Robot.oi.xbox.getY(Hand.kLeft);
+				turn = Robot.oi.xbox.getX(Hand.kLeft);
+			} else {
+				move = Robot.oi.xbox.getY(Hand.kLeft);
+				turn = Robot.oi.xbox.getX(Hand.kLeft);
+			}
 		}
-		
-		double axis = Robot.oi.xbox.getTriggerAxis(Hand.kRight) * RobotMap.DRIVE_SCALE_FACTOR;
+
+		/*double axis = Robot.oi.xbox.getTriggerAxis(Hand.kRight) * RobotMap.DRIVE_SCALE_FACTOR;
 		double throttle = RobotMap.orientForward ? axis : -axis;
-		double t = Robot.oi.xbox.getX(Hand.kLeft);
-		
-		//stick only
-		//Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.DRIVE_SCALE_FACTOR);
-		
-		//trigger and stick
-		
-		if(DriverStation.getInstance().isOperatorControl()) {
-			Robot.driveTrain.arcadeDrive(throttle, t);
-		} else if(DriverStation.getInstance().isAutonomous()) {
+		double t = Robot.oi.xbox.getX(Hand.kLeft);*/
+
+		// stick only
+		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn *
+		RobotMap.DRIVE_SCALE_FACTOR);
+
+		// trigger and stick
+
+		if (DriverStation.getInstance().isOperatorControl()) {
+			//Robot.driveTrain.arcadeDrive(throttle, t);
+		} else if (DriverStation.getInstance().isAutonomous()) {
 			Robot.driveTrain.arcadeDrive(move, turn);
 		}
-		
-		//Robot.driveTrain.curvatureDrive(move * RobotMap.DRIVE_SCALE_FACTOR, turn * RobotMap.DRIVE_SCALE_FACTOR);
+
+		// Robot.driveTrain.curvatureDrive(move * RobotMap.DRIVE_SCALE_FACTOR, turn *
+		// RobotMap.DRIVE_SCALE_FACTOR);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -140,8 +140,13 @@ public class Robot extends IterativeRobot {
 		if (recorder.isRunning) {
 			recorder.stop();
 		}
-		Timer.delay(5.0);
-		Scheduler.getInstance().add(new Drive(0.6, 0, 5.0));
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scheduler.getInstance().add(new Drive(-0.5, 0, 4.0));
 		/*if (auto == null) 
 		 * {
 			String name = DriverStation.getInstance().getGameSpecificMessage().substring(0, 2);

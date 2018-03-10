@@ -38,6 +38,15 @@ public class Drivetrain extends Subsystem {
 		rightFrontMotor = new WPI_TalonSRX(RobotMap.rightFront);
 		rightRearMotor = new WPI_TalonSRX(RobotMap.rightBack);
 		
+		//Sets max current for talon srxs
+		int maxCurr = 25;
+		setTalonCurrLimit(leftFrontMotor, maxCurr);
+		setTalonCurrLimit(leftRearMotor, maxCurr);
+
+		setTalonCurrLimit(rightFrontMotor, maxCurr);
+		setTalonCurrLimit(rightRearMotor, maxCurr);
+
+		
 		//rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 20);
 		//rightRearMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 20);
 		//rightFrontMotor.setSensorPhase(false);
@@ -49,6 +58,14 @@ public class Drivetrain extends Subsystem {
 		dd = new DifferentialDrive(left, right);
 		dd.setSafetyEnabled(false);
 		dd.setDeadband(0.1);
+	}
+	
+	//Sets max current/amps for talon srxs
+	private void setTalonCurrLimit(WPI_TalonSRX tal,  int amps) {
+		tal.configContinuousCurrentLimit(amps, 1000);
+		tal.configPeakCurrentLimit(amps, 1000);
+		tal.configPeakCurrentDuration(0, 1000);
+		tal.enableCurrentLimit(true);
 	}
 	
 	@Override

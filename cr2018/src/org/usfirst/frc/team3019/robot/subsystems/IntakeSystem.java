@@ -2,6 +2,8 @@ package org.usfirst.frc.team3019.robot.subsystems;
 
 import org.usfirst.frc.team3019.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,6 +23,7 @@ public class IntakeSystem extends Subsystem {
 		right = new VictorSP(RobotMap.rightIntakeMotor);
 		stop = new DigitalInput(RobotMap.intakeStopSwitch);
 		speed = 0.0;
+		
 	}
 	
 	public void setMotors(double speed) {
@@ -34,6 +37,15 @@ public class IntakeSystem extends Subsystem {
 		right.stopMotor();
 		speed = 0.0;
 	}
+	
+	// Look in Drivetrain.java. We need to have the same type of function for the VictorSPs in this file
+	/*private void setTalonCurrLimit(WPI_TalonSRX tal,  int amps)
+	{
+		tal.configContinuousCurrentLimit(amps, 1000);
+		tal.configPeakCurrentLimit(amps, 1000);
+		tal.configPeakCurrentDuration(0, 1000);
+		tal.enableCurrentLimit(true);
+	}*/
 	
 	@Override
 	protected void initDefaultCommand() {
