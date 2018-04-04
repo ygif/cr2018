@@ -17,7 +17,6 @@ public class Playback {
 
 	private final String PATH = "/home/lvuser";
 	private File file;
-	private BufferedReader br;
 	public boolean isRunning;
 	private ArrayList<String> values;
 	private ArrayList<String> fieldValues;
@@ -36,8 +35,14 @@ public class Playback {
 		fieldValues = new ArrayList<String>();
 		storeCurrentConstants();
 		try {
-			br = new BufferedReader(new FileReader(file));
-		} catch (FileNotFoundException e) {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			String in = br.readLine();
+			while (in != null) {
+				values.add(in);
+				in = br.readLine();
+			}
+			br.close();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		isRunning = false;
@@ -47,31 +52,12 @@ public class Playback {
 	 * Creates an instance of Playback using a file named temp
 	 */
 	public Playback() {
-		file = new File(PATH + "/temp.txt");
-		values = new ArrayList<String>();
-		loc = 1;
-		fieldValues = new ArrayList<String>();
-		storeCurrentConstants();
-		try {
-			br = new BufferedReader(new FileReader(file));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		isRunning = false;
+		this("temp");
 	}
 
 	public void start() {
 		isRunning = true;
 		System.out.println("Started playing back recording.");
-		try {
-			String in = br.readLine();
-			while (in != null) {
-				values.add(in);
-				in = br.readLine();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		setTempConstants();
 		startTime = Timer.getFPGATimestamp();
