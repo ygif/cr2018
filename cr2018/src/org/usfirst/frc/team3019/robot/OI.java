@@ -9,7 +9,7 @@ package org.usfirst.frc.team3019.robot;
 
 import org.usfirst.frc.team3019.robot.commands.Climb;
 import org.usfirst.frc.team3019.robot.commands.Intake;
-import org.usfirst.frc.team3019.robot.commands.MoveElevator;
+import org.usfirst.frc.team3019.robot.commands.RotateClaw;
 import org.usfirst.frc.team3019.util.PlaybackXboxController;
 
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -26,26 +26,26 @@ public class OI {
 	
 	Button intake; 
 	Button outtake;
-	Button elevatorUp;
-	Button elevatorDown;
+	Button clawUp;
+	Button clawDown;
 	Button toggleDriveOrientation; 
 	Button climb;
 	Button climbDown;
 	
 	public OI() {
 		xbox = new PlaybackXboxController(RobotMap.xbox1port);
-		intake = new JoystickButton(xbox, 1);
-		outtake = new JoystickButton(xbox, 2);
-		elevatorUp = new JoystickButton(xbox, 5);
-		elevatorDown = new JoystickButton(xbox, 6);
+		intake = new JoystickButton(xbox, 5);
+		outtake = new JoystickButton(xbox, 6);
+		clawUp = new JoystickButton(xbox, 1);
+		clawDown = new JoystickButton(xbox, 2);
 		toggleDriveOrientation = new JoystickButton(xbox, 8);
 		climb = new JoystickButton(xbox, 4);
 		climbDown = new JoystickButton(xbox, 3);
 		
 		intake.whileHeld(new Intake(false));
 		outtake.whileHeld(new Intake(true));
-		elevatorUp.whileHeld(new MoveElevator(false));
-		elevatorDown.whileHeld(new MoveElevator(true));
+		clawUp.whileHeld(new RotateClaw(false));
+		clawDown.whileHeld(new RotateClaw(true));
 		climb.whileHeld(new Climb (false));
 		climbDown.whileHeld(new Climb(true));
 		toggleDriveOrientation.whenPressed(new InstantCommand() {

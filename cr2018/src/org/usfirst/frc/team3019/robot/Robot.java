@@ -27,7 +27,7 @@ import org.usfirst.frc.team3019.robot.commands.Drive;
 import org.usfirst.frc.team3019.robot.subsystems.ArmRotator;
 import org.usfirst.frc.team3019.robot.subsystems.Climber;
 import org.usfirst.frc.team3019.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team3019.robot.subsystems.Elevator;
+import org.usfirst.frc.team3019.robot.subsystems.ClawRotator;
 import org.usfirst.frc.team3019.robot.subsystems.IntakeSystem;
 import org.usfirst.frc.team3019.util.Playback;
 import org.usfirst.frc.team3019.util.Recorder;
@@ -42,7 +42,7 @@ import org.usfirst.frc.team3019.util.Recorder;
 public class Robot extends IterativeRobot {
 	public static Drivetrain driveTrain;
 	public static Climber climber;
-	public static Elevator elevator;
+	public static ClawRotator clawRotator;
 	public static IntakeSystem intakeSystem;
 	public static ArmRotator armRotator;
 	public static OI oi;
@@ -82,7 +82,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		driveTrain = new Drivetrain();
 		climber = new Climber();
-		elevator = new Elevator();
+		clawRotator = new ClawRotator();
 		intakeSystem = new IntakeSystem();
 		armRotator = new ArmRotator();
 
@@ -143,7 +143,6 @@ public class Robot extends IterativeRobot {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Scheduler.getInstance().add(new Drive(-0.5, 0, 4.0));

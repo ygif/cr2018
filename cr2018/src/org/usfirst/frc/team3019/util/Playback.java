@@ -2,7 +2,6 @@ package org.usfirst.frc.team3019.util;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -93,8 +92,8 @@ public class Playback {
 			String[] input = values.get(loc).split(";", 4);
 			// At the moment input[0] contains a timestamp and the battery voltage
 			// if the information is necessary to use in the future.
-			// set buttons
 			
+			// set buttons
 			{
 				String[] tokens = input[1].split(" ");
 				boolean[] buttonStates = new boolean[tokens.length];

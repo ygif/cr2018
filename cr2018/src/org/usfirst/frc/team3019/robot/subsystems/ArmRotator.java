@@ -3,8 +3,6 @@ package org.usfirst.frc.team3019.robot.subsystems;
 import org.usfirst.frc.team3019.robot.RobotMap;
 import org.usfirst.frc.team3019.robot.commands.RotateArm;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,8 +15,8 @@ public class ArmRotator extends Subsystem {
 	public DigitalInput stopper;
 	
 	public ArmRotator() {
-		rotateMotorOne = new VictorSP(RobotMap.rotateClawMotorOne);
-		rotateMotorTwo = new VictorSP(RobotMap.rotateClawMotorTwo);
+		rotateMotorOne = new VictorSP(RobotMap.rotateArmMotorOne);
+		rotateMotorTwo = new VictorSP(RobotMap.rotateArmMotorTwo);
 		
 		stopper = new DigitalInput(RobotMap.armRotateSwitch);
 	}

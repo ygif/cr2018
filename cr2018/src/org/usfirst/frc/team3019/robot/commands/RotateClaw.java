@@ -5,30 +5,30 @@ import org.usfirst.frc.team3019.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveElevator extends Command {
+public class RotateClaw extends Command {
 	
-	public boolean down;
+	public boolean up;
 	
-	public MoveElevator(boolean down) {
+	public RotateClaw(boolean down) {
 		super();
-		requires(Robot.elevator);
-		this.down = down;
+		requires(Robot.clawRotator);
+		this.up = down;
 	}
 	
-	public MoveElevator() {
+	public RotateClaw() {
 		super();
-		requires(Robot.elevator);
-		down = false;
+		requires(Robot.clawRotator);
+		up = false;
 	}
 
 	@Override
 	protected void execute() {
-		Robot.elevator.setMotors((down ? -1.0 : 1.0) * RobotMap.ELEVATOR_MOVE_SCALE_FACTOR);
+		Robot.clawRotator.setMotors((up ? -1.0 : 1.0) * RobotMap.CLAW_ROTATE_SCALE_FACTOR);
 	}
 
 	@Override
 	protected void end() {
-		Robot.elevator.stopMotors();
+		Robot.clawRotator.stopMotors();
 	}
 
 	@Override
