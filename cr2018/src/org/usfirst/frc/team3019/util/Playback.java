@@ -2,6 +2,7 @@ package org.usfirst.frc.team3019.util;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -9,13 +10,16 @@ import java.util.ArrayList;
 
 import org.usfirst.frc.team3019.robot.Robot;
 import org.usfirst.frc.team3019.robot.RobotMap;
+import org.usfirst.frc.team3019.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Playback {
 
 	private final String PATH = "/home/lvuser";
 	private File file;
+	private BufferedReader br;
 	public boolean isRunning;
 	private ArrayList<String> values;
 	private ArrayList<String> fieldValues;
@@ -34,15 +38,10 @@ public class Playback {
 		fieldValues = new ArrayList<String>();
 		storeCurrentConstants();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			String in = br.readLine();
-			while (in != null) {
-				values.add(in);
-				in = br.readLine();
-			}
-			br.close();
-		} catch (IOException e) {
+			br = new BufferedReader(new FileReader(file));
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			Scheduler.getInstance().add(new Drive(-0.5, 0, 4.1));
 		}
 		isRunning = false;
 	}
@@ -57,6 +56,15 @@ public class Playback {
 	public void start() {
 		isRunning = true;
 		System.out.println("Started playing back recording.");
+		try {
+			String in = br.readLine();
+			while (in != null) {
+				values.add(in);
+				in = br.readLine();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		setTempConstants();
 		startTime = Timer.getFPGATimestamp();
@@ -119,7 +127,7 @@ public class Playback {
 					povValues[i] = Integer.parseInt(tokens[i]);
 				}
 				Robot.oi.xbox.setPOVValues(povValues);
-			}
+			} 
 		} else if (loc == values.size()) {
 			System.out.println("Reached the end of the recording");
 		}

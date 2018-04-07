@@ -44,7 +44,6 @@ public class Drivetrain extends Subsystem {
 		setTalonCurrLimit(rightFrontMotor, maxCurr);
 		setTalonCurrLimit(rightRearMotor, maxCurr);
 
-		
 		//rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 20);
 		//rightRearMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 20);
 		//rightFrontMotor.setSensorPhase(false);
@@ -72,11 +71,11 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void arcadeDrive(double moveValue, double rotateValue){
-		dd.arcadeDrive(moveValue * RobotMap.DRIVE_SCALE_FACTOR, rotateValue * RobotMap.DRIVE_SCALE_FACTOR);
+		dd.arcadeDrive(moveValue * RobotMap.DRIVE_MOVE_SCALE_FACTOR, rotateValue * RobotMap.TURN_SCALE_FACTOR);
 	}
 	
 	public void curvatureDrive(double moveSpeed, double turn) {
-		dd.curvatureDrive(moveSpeed * RobotMap.DRIVE_SCALE_FACTOR, turn * RobotMap.DRIVE_SCALE_FACTOR, true);
+		dd.curvatureDrive(moveSpeed * RobotMap.DRIVE_MOVE_SCALE_FACTOR, turn * RobotMap.DRIVE_TURN_SCALE_FACTOR, true);
 	}
 	
 	public void postEncoderValues() {

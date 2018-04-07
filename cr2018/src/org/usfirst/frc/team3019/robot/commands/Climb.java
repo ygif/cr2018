@@ -28,7 +28,7 @@ public class Climb extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.climber.setMotors((backward ? -1.0 : 1.0) * RobotMap.DRIVE_SCALE_FACTOR);
+		Robot.climber.setMotors((backward ? -1.0 : 1.0) * RobotMap.CLIMB_SCALE_FACTOR);
 	}
 	
 	@Override

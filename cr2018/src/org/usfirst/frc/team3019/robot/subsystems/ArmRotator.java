@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ArmRotator extends Subsystem {
 
-	VictorSP rotateMotorOne;
-	VictorSP rotateMotorTwo;
+	public VictorSP rotateMotorOne;
+	public VictorSP rotateMotorTwo;
 	
 	public DigitalInput stopper;
 	

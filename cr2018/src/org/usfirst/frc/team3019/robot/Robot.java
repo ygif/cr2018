@@ -50,28 +50,26 @@ public class Robot extends IterativeRobot {
 	SendableChooser<String> station = new SendableChooser<String>();
 	SendableChooser<Boolean> shouldRecord = new SendableChooser<Boolean>();
 	SendableChooser<String> switchSide = new SendableChooser<String>();
-	SendableChooser<String> scaleSide = new SendableChooser<String>();
+	// SendableChooser<String> scaleSide = new SendableChooser<String>();
 	Recorder recorder;
 	Playback auto;
 
 	public Robot() {
-		/*new Thread(() -> {
-
-			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-			camera.setResolution(640, 480);
-
-			CvSink cvSink = CameraServer.getInstance().getVideo();
-			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
-
-			Mat source = new Mat();
-			Mat output = new Mat();
-
-			while (!Thread.interrupted()) {
-				cvSink.grabFrame(source);
-				Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-				outputStream.putFrame(output);
-			}
-		}).start();*/
+		/*
+		 * new Thread(() -> {
+		 * 
+		 * UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		 * camera.setResolution(640, 480);
+		 * 
+		 * CvSink cvSink = CameraServer.getInstance().getVideo(); CvSource outputStream
+		 * = CameraServer.getInstance().putVideo("Blur", 640, 480);
+		 * 
+		 * Mat source = new Mat(); Mat output = new Mat();
+		 * 
+		 * while (!Thread.interrupted()) { cvSink.grabFrame(source);
+		 * Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+		 * outputStream.putFrame(output); } }).start();
+		 */
 	}
 
 	/**
@@ -100,10 +98,6 @@ public class Robot extends IterativeRobot {
 		switchSide.addDefault("Left Switch", "L");
 		switchSide.addObject("Right Switch", "R");
 		SmartDashboard.putData("Switch Side", switchSide);
-
-		scaleSide.addDefault("Left Scale", "L");
-		scaleSide.addObject("Right Scale", "R");
-		SmartDashboard.putData("Scale Side", scaleSide);
 
 		oi = new OI();
 	}
@@ -137,23 +131,39 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		if (recorder.isRunning) {
-			recorder.stop();
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		double seconds = 0;
+		long start = System.nanoTime();
+		while(this.isAutonomous() && seconds < 3) {
+			seconds = (System.nanoTime() - start) * (1e-9);
+			driveTrain.arcadeDrive(-0.6, 0.0);
 		}
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		Scheduler.getInstance().add(new Drive(-0.5, 0, 4.0));
-		/*if (auto == null) 
-		 * {
-			String name = DriverStation.getInstance().getGameSpecificMessage().substring(0, 2);
-			name += station.getSelected();
-			auto = new Playback(name);
-		}
-		auto.start();
-		oi.xbox.setPlaybackMode(true);*/
+		driveTrain.arcadeDrive(0.0, 0.0);
+		
+//		if(gameData.substring(0, 1).equals("R")) {
+//			seconds = 0;
+//			start = System.nanoTime();
+//			while(this.isAutonomous() && seconds < 3) {
+//				seconds = (System.nanoTime() - start) * (1e-9);
+//				intakeSystem.setMotors(0.8);
+//				clawRotator.setMotors(-0.2);
+//			}
+//			intakeSystem.stopMotors();
+//			clawRotator.setMotors(0);
+//		}
+//		if (recorder.isRunning) {
+//			recorder.stop();
+//		}
+		
+//		// Scheduler.getInstance().add(new Drive(-0.5, 0, 4.1));
+//		if (auto == null) {
+//			String name = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);
+//			name += station.getSelected();
+//			auto = new Playback(name);
+//		}
+//		auto.start();
+//		oi.xbox.setPlaybackMode(true);
 	}
 
 	/**
@@ -161,11 +171,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		
-		//auto.playback();
-		Scheduler.getInstance().run();
 
-		// setPeriod(auto.getRecordedPeriod());
+//		auto.playback();
+//		Scheduler.getInstance().run();
+//
+//		// setPeriod(auto.getRecordedPeriod());
 	}
 
 	@Override
@@ -185,7 +195,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 
 		if (shouldRecord.getSelected().booleanValue() && !recorder.isRunning) {
-			recorder.start(switchSide.getSelected() + scaleSide.getSelected() + station.getSelected());
+			recorder.start(switchSide.getSelected() + station.getSelected());
 		} else if (shouldRecord.getSelected().booleanValue() == false && recorder.isRunning) {
 			recorder.stop();
 		}

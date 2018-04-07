@@ -76,28 +76,7 @@ public class Recorder {
 	 * Start recording input data from a joystick into a file called temp
 	 */
 	public void start() {
-		file = new File(PATH + "/temp.txt");
-		file.setWritable(true);
-		file.setReadable(true);
-
-		if (file.exists()) {
-			file.delete();
-		}
-
-		try {
-			file.createNewFile();
-			fw = new FileWriter(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		writeRobotConstants();
-		
-		startTime = Timer.getFPGATimestamp();
-		timeStamp = 0.0;
-		loopTime = 0.02;
-
-		isRunning = true;
+		start("temp");
 	}
 
 	/**

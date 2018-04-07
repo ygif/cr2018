@@ -36,17 +36,17 @@ public class OI {
 		xbox = new PlaybackXboxController(RobotMap.xbox1port);
 		intake = new JoystickButton(xbox, 5);
 		outtake = new JoystickButton(xbox, 6);
-		clawUp = new JoystickButton(xbox, 1);
-		clawDown = new JoystickButton(xbox, 2);
+		clawUp = new JoystickButton(xbox, 2);
+		clawDown = new JoystickButton(xbox, 1);
 		toggleDriveOrientation = new JoystickButton(xbox, 8);
-		climb = new JoystickButton(xbox, 4);
-		climbDown = new JoystickButton(xbox, 3);
+		climb = new JoystickButton(xbox, 3);
+		climbDown = new JoystickButton(xbox, 4);
 		
 		intake.whileHeld(new Intake(false));
 		outtake.whileHeld(new Intake(true));
 		clawUp.whileHeld(new RotateClaw(false));
 		clawDown.whileHeld(new RotateClaw(true));
-		climb.whileHeld(new Climb (false));
+		climb.whileHeld(new Climb(false));
 		climbDown.whileHeld(new Climb(true));
 		toggleDriveOrientation.whenPressed(new InstantCommand() {
 			@Override
