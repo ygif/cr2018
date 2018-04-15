@@ -8,6 +8,7 @@
 package org.usfirst.frc.team3019.robot;
 
 import org.usfirst.frc.team3019.robot.commands.Climb;
+import org.usfirst.frc.team3019.robot.commands.HoldClaw;
 import org.usfirst.frc.team3019.robot.commands.Intake;
 import org.usfirst.frc.team3019.robot.commands.RotateClaw;
 import org.usfirst.frc.team3019.util.PlaybackXboxController;
@@ -46,6 +47,7 @@ public class OI {
 		outtake.whileHeld(new Intake(true));
 		clawUp.whileHeld(new RotateClaw(false));
 		clawDown.whileHeld(new RotateClaw(true));
+		clawDown.whenReleased(new HoldClaw());
 		climb.whileHeld(new Climb(false));
 		climbDown.whileHeld(new Climb(true));
 		toggleDriveOrientation.whenPressed(new InstantCommand() {
