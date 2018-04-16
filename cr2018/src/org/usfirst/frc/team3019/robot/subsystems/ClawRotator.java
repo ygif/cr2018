@@ -9,15 +9,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ClawRotator extends Subsystem {
 
 	VictorSP one;
-	public DigitalInput top;
-	public DigitalInput bottom;
+	public DigitalInput stopper;
 	
 	public double speed;
 	
 	public ClawRotator() {
 		one = new VictorSP(RobotMap.clawRotateMotorOne);
-		top = new DigitalInput(RobotMap.topElevatorSwitch);
-		bottom = new DigitalInput(RobotMap.bottomElevatorSwitch);
+		stopper = new DigitalInput(RobotMap.clawSwitch);
 		speed = 0.0;
 	}
 	
@@ -33,6 +31,6 @@ public class ClawRotator extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		
+		setDefaultCommand(null);
 	}
 }

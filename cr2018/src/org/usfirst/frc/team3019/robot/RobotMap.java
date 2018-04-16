@@ -23,14 +23,12 @@ public class RobotMap {
 	public static boolean orientForward = false;
 	
 	//Use these to change how fast each system moves
-	public static double DRIVE_MOVE_SCALE_FACTOR = 1.0;
-	public static double DRIVE_TURN_SCALE_FACTOR = 0.8;
+	public static double DRIVE_SCALE_FACTOR = 1.0;
 	public static double CLAW_ROTATE_SCALE_FACTOR = 0.25;
 	public static double CLIMB_SCALE_FACTOR = 1.0;
 	public static double ARM_ROTATE_SCALE_FACTOR = 0.8;//0.4
 	public static double INTAKE_SCALE_FACTOR = 1.0;
 	public static double TURN_SCALE_FACTOR = 1.0;
-	//
 	
 	public static int leftFront = 2;
 	public static int leftBack = 1;
@@ -45,8 +43,7 @@ public class RobotMap {
 	public static int rotateArmMotorOne = 3;//PWM
 	public static int rotateArmMotorTwo = 4;//PWM
 	
-	public static int topElevatorSwitch = 6;
-	public static int bottomElevatorSwitch = 7;
+	public static int clawSwitch = 6;
 	public static int intakeStopSwitch = 3;
 	public static int armRotateSwitch = 4;
 }

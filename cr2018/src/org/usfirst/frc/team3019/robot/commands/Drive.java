@@ -58,7 +58,7 @@ public class Drive extends Command {
 		 */
 
 		// stick only
-		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_MOVE_SCALE_FACTOR, -turn * RobotMap.DRIVE_TURN_SCALE_FACTOR);
+		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.TURN_SCALE_FACTOR);
 
 		// trigger and stick
 

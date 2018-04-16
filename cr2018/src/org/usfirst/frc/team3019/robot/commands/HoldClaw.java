@@ -22,7 +22,7 @@ public class HoldClaw extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return !Robot.clawRotator.top.get();
+		return !Robot.clawRotator.stopper.get();
 	}
 	
 	@Override

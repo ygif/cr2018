@@ -131,39 +131,18 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		double seconds = 0;
-		long start = System.nanoTime();
-		while(this.isAutonomous() && seconds < 3) {
-			seconds = (System.nanoTime() - start) * (1e-9);
-			driveTrain.arcadeDrive(-0.6, 0.0);
+		if (recorder.isRunning) {
+			recorder.stop();
 		}
-		driveTrain.arcadeDrive(0.0, 0.0);
-		
-//		if(gameData.substring(0, 1).equals("R")) {
-//			seconds = 0;
-//			start = System.nanoTime();
-//			while(this.isAutonomous() && seconds < 3) {
-//				seconds = (System.nanoTime() - start) * (1e-9);
-//				intakeSystem.setMotors(0.8);
-//				clawRotator.setMotors(-0.2);
-//			}
-//			intakeSystem.stopMotors();
-//			clawRotator.setMotors(0);
-//		}
-//		if (recorder.isRunning) {
-//			recorder.stop();
-//		}
-		
-//		// Scheduler.getInstance().add(new Drive(-0.5, 0, 4.1));
-//		if (auto == null) {
-//			String name = DriverStation.getInstance().getGameSpecificMessage().substring(0, 1);
-//			name += station.getSelected();
-//			auto = new Playback(name);
-//		}
-//		auto.start();
-//		oi.xbox.setPlaybackMode(true);
+
+		// Scheduler.getInstance().add(new Drive(-0.5, 0, 4.0));
+		if (auto == null) {
+			String name = DriverStation.getInstance().getGameSpecificMessage().substring(0, 2);
+			name += station.getSelected();
+			auto = new Playback(name);
+		}
+		auto.start();
+		oi.xbox.setPlaybackMode(true);
 	}
 
 	/**
@@ -172,10 +151,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 
-//		auto.playback();
-//		Scheduler.getInstance().run();
-//
-//		// setPeriod(auto.getRecordedPeriod());
+		 auto.playback();
+		 Scheduler.getInstance().run();
+		
+		// setPeriod(auto.getRecordedPeriod());
 	}
 
 	@Override
